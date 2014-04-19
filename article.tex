@@ -1,0 +1,73 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+% Reduces margins substantially.
+\usepackage{fullpage}
+
+\usepackage[backend=bibtex,style=authoryear,sorting=nyt,dashed=false]{biblatex}
+% Changes e.g. \parencite{jones2003} from (Jones 2003) to (Jones, 2003)
+\renewcommand*{\nameyeardelim}{\addcomma\space}
+\defbibfilter{practical1}{
+    keyword=practical1
+}
+
+\defbibfilter{practical2}{
+    keyword=practical2
+}
+
+\bibliography{references/references}
+
+\begin{document}
+
+% Practical 1:
+\part*{Modelling the effects of dredging on a tidal estuary}
+
+\section{Introduction}
+According to \textcite{cea2012bathymetric} the effects of bathymatric uncertainty are well understood. However, it has been shown that a higher albedo leads to cooling.
+
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=\linewidth]{geogg101_screenshots/practical1/foweyROI}
+    \caption{Composite satellite image of the Fowey Estuary}
+    \label{fig:fowey_estuary}
+\end{figure}
+
+\section{Methods}
+
+\section{Results}
+Results to go here. As can be seen in Figure~\ref{fig:rising_tide}.
+
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=\linewidth]{geogg101_screenshots/practical1/global_rising_2_400}
+    \caption{Rising tide in the Fowey Estuary}
+    \label{fig:rising_tide}
+\end{figure}
+
+\section{Conclusions}
+Conclusions to go here\ldots
+
+\printbibliography[filter=practical1]
+
+\newpage
+\setcounter{section}{0}
+
+% Practical 2:
+\part*{Modelling the effects of deforestation on a catchment area}
+
+\section{Introduction}
+MIKE SHE is a deterministic, distributed and physically based modelling system for modelling water flow through catchments \parencite{refshaard1995mike}. It can be coupled to MIKE 11, which models one-dimensional water flow through channels \parencite{havno1995mike}. Wetlands can be effectively simulated by MIKE SHE \parencite{thompson2004simulation}. 
+
+\section{Methods}
+Methods
+
+\section{Results}
+Results to go here\ldots
+
+\section{Conclusions}
+Conclusions to go here\ldots
+
+\printbibliography[filter=practical2]
+
+
+\end{document}

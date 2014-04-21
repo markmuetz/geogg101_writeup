@@ -1,5 +1,7 @@
 \documentclass{article}
 
+\usepackage{amsmath}
+\usepackage{siunitx}
 \usepackage{graphicx}
 % Reduces margins substantially.
 \usepackage{fullpage}
@@ -26,38 +28,79 @@
 
 \section{Introduction}
 
-What is being modelled. Dredging.
+% Read advice on introduction in notes then rewrite.
 
-\subsection{Area of study}
-
-Does it need its own subsection?
+The Fowey Estuary is a macrotidal estuary with a mean spring tidal range of \SI{4.8}{\m} \parencite{uncles2002dependence}. It is located in Cornwall on the south coast of England (see Figure \ref{fig:fowey_estuary_map}). It is fed by two rivers, the Fowey and the Lerryn, with mean discharges of \SI{1.5}{cumecs} and \SI{0.8}{cumecs} respectively.
+It is therefore tidally dominated, although the contributions of both these rivers was modelled.
 
 \begin{figure}[hbp]
     \centering
-    \includegraphics[width=10cm]{geogg101_screenshots/practical1/fowey_estuary_map}
-    \caption{Map of the Fowey Estuary. Taken from \textcite{friend2006sediment}.}
-    \label{fig:fowey_estuary}
+    \includegraphics[width=10cm]{geogg101_screenshots/practical1/fowey_estuary_map_qgis}
+    \caption{Location map of the Fowey Estuary study area, southwest England, UK. }
+    \label{fig:fowey_estuary_map}
 \end{figure}
 
-\section{Methodology}
+The purpose of this study is to investigate the effects of dredging the Fowey Estuary from the harbour out to sea. The proposed dredged channel would be approximately \SI{8}{m} deeper than the current sea floor near the harbour with a mean difference of \SI{5}{m}, and would be \SI{200}{m} wide. This study will model the effects of this change on water speed and height at four locations: in the Estuary mouth, at the Berth,  Mid-Estuary and Upstream (see Figure \ref{fig:fowey_estuary_map}). 
+
+\section{Methods}
 
 \subsection{Model}
 
-Two-dimensional depth averaged model named RMA-2 \parencite{king1990program}. It was developed within the SMS modelling package, which was used to create the mesh and control the model runs.
+The model used was two-dimensional depth averaged tidal model named RMA-2 \parencite{king1990program}. It was built within the Surface-water Modelling System (SMS) modelling program, which was used to create the mesh, integrate the bathymetry, apply the river and tidal boundary conditions and control the model runs.
 
 \subsection{Model setup}
 
-Mesh. Boundary conditions. Bathymetry. Other?
+A mesh of the Estuary was created by digitizing the coastline and banks of the rivers. This was resampled at \SI{30}{m} to give an element size of the same order. Beyond the mouth of the Estuary a larger element size of \SI{50}{m} was used. The meshed area, as well as a close-up of a typical section and the transition at the mouth of the Estuary, can be seen in Figure \ref{fig:combined_meshes}. In total, XX \SI{30}{m} elments and YY \SI{50}{m} elements were used. Before running the model, a quality check of the mesh was performed by SMS. There were XX `size changed' warnings, but apart from these the mesh met SMS' quality criteria.
 
+
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=10cm]{geogg101_screenshots/practical1/combined_meshes}
+    \caption{Mesh generated for the Fowey Estuary, with a close-up of two sections. The main mesh shows the boundary conditions for both of the rivers in \SI{}{m/s} in red, as well as the initial water level at the sea boundary shown in \SI{}{m} in blue.}
+    \label{fig:combined_meshes}
+\end{figure}
+
+The bathymetry used was \ldots
+
+At the influx of the Fowey and Lerryn Rivers, mean discharges perpendicular to the boundaries of \SI{1.5}{cumecs} and \SI{0.8}{cumecs} respectively were specified. The sea boundary was prescribed using an observed time series of tidal levels for the Estuary.
+
+The model was run for \SI{74}{hours} with a \SI{15}{minute} timestep. It was run from a coldstart, with the water level at the sea boundary being set to \SI{-0.72}{m}. 
 
 \subsection{Calibration}
-Following \textcite{piedra2007residual, sousa2007hydrodynamic} the  Manning number was varied to achieve the best fit between the model and the observations. talks about how bathymatric uncertainty can be used to cal model: \textcite{cea2012bathymetric}
+
+Following \textcite{piedra2007residual, sousa2007hydrodynamic} the  Manning bed friction coefficient was varied to achieve the best fit between the model and the observations. The potential range for the Manning coefficient, $n$, was 0.1 to 0.4. The Nash-Sutcliffe Efficiency (NSE, see \textcite{nash1970river}) and Root Mean Squared Error (RMSE) were calculated for each value of $n$. 
+
+\begin{align*}
+    RMSE &= \frac{1}{n} \sqrt{ \sum_{t = 1}^N ( O_t - M_t) ^ 2 }\\
+    NSE  &= 1 - \frac{\sum_{t = 1}^N ( O_t - M_t) ^ 2 }{\sum_{t = 1}^N ( O_t - O_{mean}) ^ 2 }
+\end{align*}
+
+The results can be seen if Figure \ref{fig:calibration_stats}. From these four graphs it is clear that the value of $n$ that gives best fit with the observed data is $n = 0.03$, and this value was used for the subsequent models. The two values of $NSE = 0.956, 0.0.997$ both represent `excellent' fit with data according to the guidelines provided by \textcite{henriksen2008assessment} because they are greater than $0.85$. 
+
+Throughout the calibration, turbulence was modelled using an eddy viscosity of \SI{9000}{ N.s.m^{-2} }
+
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=10cm]{geogg101_screenshots/practical1/calibration_stats}
+    \caption{RMSE and NSE for velocity magnitude and water level when comparing the simulated and observed values at observation point XXX. The blue dot represents the best fit for each of the four graphs, which is given by a bed friction coefficient of $n = 0.03$.}
+    \label{fig:calibration_stats}
+\end{figure}
+
+
 
 \subsection{Dredging scenario}
 
-\section{Results and discussion}
-Results to go here. As can be seen in Figure~\ref{fig:rising_tide}.
+To investigate the effect of dredging on the Estuary, the bathymetry was altered to simulate dredging by \SI{8}{m}. This alteration can be seen in Figure \ref{fig:delta_depth}.
 
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=10cm]{geogg101_screenshots/practical1/delta_water_depth_rotated}
+    \caption{Difference in bathymetries between undredged and dredged scenarios.}
+    \label{fig:delta_depth}
+\end{figure}
+
+\section{Results and analysis}
+Results to go here. As can be seen in Figure~\ref{fig:rising_tide}.
 
 \begin{figure}[hbp]
     \centering
@@ -66,8 +109,11 @@ Results to go here. As can be seen in Figure~\ref{fig:rising_tide}.
     \label{fig:rising_tide}
 \end{figure}
 
+\section{Discussion}
+
+talks about how bathymatric uncertainty can be used to cal model: \textcite{cea2012bathymetric}
+
 \section{Conclusions}
-Is this section necessary?
 
 \printbibliography[filter=practical1]
 
@@ -75,6 +121,7 @@ Is this section necessary?
 \setcounter{section}{0}
 
 % Practical 2:
+
 \part*{Modelling the effects of deforestation on a catchment area}
 
 \section{Introduction}

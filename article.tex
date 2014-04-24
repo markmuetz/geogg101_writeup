@@ -33,8 +33,6 @@
 
 \begin{document}
 
-% Third person throughout. Should mainly be in present tense.
-
 % Practical 1:
 \part*{Modelling the effects of dredging on a tidal estuary}
 
@@ -94,13 +92,13 @@ Following \textcite{piedra2007residual, sousa2007hydrodynamic}, the  Manning bed
     NSE  &= 1 - \frac{\sum_{t = 1}^N ( O_t - M_t) ^ 2 }{\sum_{t = 1}^N ( O_t - O_{mean}) ^ 2 }
 \end{align*}
 
-Where $O_t$ is the observed value at timestep $t$, $M_t$ is the measured value, and $N$ is the number of timesteps. The results can be seen if Figure \ref{fig:calibration_stats}. From these four graphs it is clear that the value of $n$ that gives best fit with the observed data is $n = 0.03$, and this value was used for the subsequent models. The two values of $NSE = 0.956, 0.997$ both represent `excellent' fit with data according to the guidelines provided by \textcite{henriksen2008assessment} because they are greater than $0.85$. 
+Where $O_t$ is the observed value at timestep $t$, $M_t$ is the measured value, and $N$ is the number of timesteps. The results can be seen if Figure \ref{fig:calibration_stats}. From these four graphs it is clear that the value of $n$ that gives best fit with the observed data is $n = 0.025$, and this value was used for the subsequent models. The two values of $NSE = 0.956, 0.997$ both represent `excellent' fit with data according to the guidelines provided by \textcite{henriksen2008assessment} because they are greater than $0.85$. 
 
 
 \begin{figure}[hbp]
     \centering
     \includegraphics[width=15cm]{geogg101_screenshots/practical1/calibration_stats}
-    \caption{RMSE and NSE for velocity magnitude and water level when comparing the simulated and observed values at observation point XXX. The blue dot represents the best fit for each of the four graphs, which is given by a bed friction coefficient of $n = 0.03$.}
+    \caption{RMSE and NSE for velocity magnitude and water level when comparing the simulated and observed values at observation point XXX. The blue dot represents the best fit for each of the four graphs, which is given by a bed friction coefficient of $n = 0.025$.}
     \label{fig:calibration_stats}
 \end{figure}
 
@@ -159,7 +157,7 @@ TODO: finish off. Talks about how bathymatric uncertainty can be used to cal mod
 
 \begin{itemize}
     \item The Fowey Estuary is a macrotidal Estuary that is suitable for being modelled by a two-dimensional shallow water model.
-    \item It best modelled by RMA-2 when using a Manning bed friction coefficient of 0.03 and an eddy viscosity of \SI{9000}{ N.s.m^{-2} }.
+    \item It best modelled by RMA-2 when using a Manning bed friction coefficient of 0.025 and an eddy viscosity of \SI{9000}{ N.s.m^{-2} }.
     \item The rising tide produces faster water speeds than the falling tide. During the rising tide, peak water speed is about \SI{8.2}{m/s}.
     \item Dredging the Estuary from the Berth out to sea would reduce the maximum speed by about \SI{0.15}{m.s^{-1}} at the Berth, and \SI{0.10}{m.s^{-1}} at the Inlet.
     \item Dredging the Estuary would have little to no effect further upstream of the dredged channel.

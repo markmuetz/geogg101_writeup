@@ -85,7 +85,7 @@ The model was run for \SI{74}{hours} with a \SI{15}{minute} timestep. It was run
 \subsection{Calibration}
 
 Throughout the calibration, turbulence was modelled using an eddy viscosity of \SI{9000}{ N.s.m^{-2} }.
-Following \textcite{piedra2007residual, sousa2007hydrodynamic}, the  Manning bed friction coefficient was varied to achieve the best fit between the model and the observations. The potential range for the Manning coefficient, $n$, was 0.01 to 0.04. The Root Mean Squared Error (RMSE) and Nash-Sutcliffe Efficiency (NSE, see \textcite{nash1970river}) were calculated for each value of $n$. 
+Following \textcite{piedra2007residual, sousa2007hydrodynamic}, the  Manning bed friction coefficient was varied to achieve the best fit between the model and the observations. The potential range for the Manning coefficient, $n$, was 0.01 to 0.04. The Root Mean Squared Error (RMSE) and Nash-Sutcliffe Efficiency (NSE, see \textcite{nash1970river}) were calculated for each value of $n$, with RMSE closer to 0 and NSE closer to one representing better fit.
 
 \begin{align*}
     RMSE &= \frac{1}{N} \sqrt{ \sum_{t = 1}^N ( O_t - M_t) ^ 2 }\\
@@ -104,7 +104,7 @@ Where $O_t$ is the observed value at timestep $t$, $M_t$ is the measured value, 
 
 \subsection{Dredging scenario}
 
-To evaluate the effect of dredging on the Estuary, the bathymetry is altered to simulate dredging by \SI{8}{m}. The proposed dredged channel is approximately \SI{8}{m} deeper than the current sea floor near the harbour with a mean difference of \SI{5}{m}, and is \SI{200}{m} wide. This alteration to the bathymetry can be seen in Figure \ref{fig:delta_depth}.
+To evaluate the effect of dredging on the Estuary, the bathymetry is altered to simulate dredging by \SI{8}{m}. The proposed dredged channel is \SI{9}{m} deeper than the current sea floor near the harbour with a mean difference of \SI{8}{m}, and is \SI{200}{m} wide. This alteration to the bathymetry can be seen in Figure \ref{fig:delta_depth}.
 
 \begin{figure}[hbp]
     \centering
@@ -151,6 +151,12 @@ There is an additional effect of dredging: the appearance of a localised area of
 
 TODO: finish off. Talks about how bathymetric uncertainty can be used to cal model: \textcite{cea2012bathymetric}
 
+Wetting and drying.
+
+Constant discharge.
+
+Eddy viscosity.
+
 \section{Conclusions}
 
 % From handout: bullet points will do here.
@@ -175,7 +181,7 @@ TODO: finish off. Talks about how bathymetric uncertainty can be used to cal mod
 
 \section{Introduction}
 
-The purpose of this study is to calibrate and validate a model of the Karup Catchment in Denmark. This model will then be used to simulate three future emissions scenarios of climate change in 2050: Low, Medium and High.  
+The purpose of this study is to calibrate and validate a model of the Karup Catchment in Denmark. This model will then be used to simulate how the catchment will bahave in 2050 under three future emissions scenarios of climate change: Low, Medium and High.  
 
 The Karup Catchment is \SI{440}{km^2}. It is situated in western Denmark and drains into the Skive Fjord. Geologically, it consists of highly permeable sand and gravel as well as occasionally lenses of clay. 
 The majority of land use is for agriculture (67\%), with forest (18\%), heath (10\%), wetland (4\%) and urban (1\%) making up the remainder \parencite{refsgaard1997parameterisation}.
@@ -187,7 +193,7 @@ The majority of land use is for agriculture (67\%), with forest (18\%), heath (1
     \label{fig:karup_catchment}
 \end{figure}
 
-MIKE SHE is a deterministic, distributed and physically based modelling system for modelling water flow through catchments \parencite{refsgaard1995mike, refsgaard2010systeme}. It can model precipitation, surface runoff, evapotsranspiration, and saturated zone and unsaturated zone subsurface flow. To model river flow it can be coupled to MIKE 11, which models one-dimensional water flow through channels by solving the Saint Venant equations \parencite{havno1995mike}.  
+MIKE SHE is a catchment model that, in one form or another, has been in use for the last 30 years \parencite{refsgaard2010systeme}. It is a deterministic, distributed and physically based modelling system for modelling water flow through catchments \parencite{refsgaard1995mike}. It can model precipitation, surface runoff, evapotsranspiration, and saturated zone and unsaturated zone subsurface flow. To model river flow it can be coupled to MIKE 11, which models one-dimensional water flow through channels by solving the Saint Venant equations \parencite{havno1995mike}.  
 MIKE SHE uses a finite difference approach to modelling catchments, and can be used with various spatially distributed characteristics such as elevation, land use and soil type. Additionally, the precipitation and evapotsranspiration can be specified for each grid cell in the model \parencite{thompson2012modelling}.
 
 \newpage
@@ -291,13 +297,11 @@ Precipitation was defined for the nine areas shown in Figure \ref{fig:precip_are
 \end{figure}
 
 
-\subsubsection{Run control}
-The model was run from 01/01/1970 to 31/12/1980. No results were derived from the first year, 1970, which was used as spin-up time for the model. The next five years, 01/01/1971 to 31/12/1975, were used to calibrate the model, and the final five were used to validate the model. (See Section \ref{sec:calibration} for details.) The model was run with a timestep of (TODO: Not sure find out!).
 
 \subsection{Calibration and validation}
 \label{sec:calibration}
 
-MIKE SHE is typically calibrated by modifying the parameters listed in Table \ref{table:calibration_parameters} \parencite{refsgaard1997parameterisation, thompson2004simulation}. Following \textcite{klemevs1986operational}, the split-sample method was used. The calibration period was from 01/01/1971 to 31/12/1975, and the validation period was from 01/01/1976 to 31/12/1980. One year, 1970, was used for model spin-up time. 
+MIKE SHE is typically calibrated by modifying the parameters listed in Table \ref{table:calibration_parameters} \parencite{refsgaard1997parameterisation, thompson2004simulation}. Following \textcite{klemevs1986operational}, the split-sample method was used. The calibration period was from 01/01/1971 to 31/12/1975, and the validation period was from 01/01/1976 to 31/12/1980. One year, 1970, was used for model spin-up time. The model was run with a timestep of (TODO: Not sure find out!).
 
 The calibration procedure used was to modify one parameter at a time, looking for the best fit with observations at the four boreholes and two river discharge stations by examining the Root Mean Squared Error (RMSE), Nash-Sutcliffe Efficiency (NSE, see \textcite{nash1970river}) and Pearson's correlation coefficient (R). Once a value for e.g. ``Horizontal hydraulic conductivity of sand aquifer'' had been chosen, the same procedure would be used for the next parameter in the table: ``Vertical hydraulic conductivity of sand aquifer''. The chosen values for each of the four parameters can be seen in \ref{table:calibration_parameters}, and the corresponding summary statistics are tabulated in Table \ref{table:summary_stats}.
 

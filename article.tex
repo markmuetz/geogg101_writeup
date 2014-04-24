@@ -85,7 +85,7 @@ The model was run for \SI{74}{hours} with a \SI{15}{minute} timestep. It was run
 \subsection{Calibration}
 
 Throughout the calibration, turbulence was modelled using an eddy viscosity of \SI{9000}{ N.s.m^{-2} }.
-Following \textcite{piedra2007residual, sousa2007hydrodynamic}, the  Manning bed friction coefficient was varied to achieve the best fit between the model and the observations. The potential range for the Manning coefficient, $n$, was 0.01 to 0.04. The Nash-Sutcliffe Efficiency (NSE, see \textcite{nash1970river}) and Root Mean Squared Error (RMSE) were calculated for each value of $n$. 
+Following \textcite{piedra2007residual, sousa2007hydrodynamic}, the  Manning bed friction coefficient was varied to achieve the best fit between the model and the observations. The potential range for the Manning coefficient, $n$, was 0.01 to 0.04. The Root Mean Squared Error (RMSE) and Nash-Sutcliffe Efficiency (NSE, see \textcite{nash1970river}) were calculated for each value of $n$. 
 
 \begin{align*}
     RMSE &= \frac{1}{N} \sqrt{ \sum_{t = 1}^N ( O_t - M_t) ^ 2 }\\
@@ -104,7 +104,7 @@ Where $O_t$ is the observed value at timestep $t$, $M_t$ is the measured value, 
 
 \subsection{Dredging scenario}
 
-To evaluate the effect of dredging on the Estuary, the bathymetry is altered to simulate dredging by \SI{8}{m}. The proposed dredged channel is approximately \SI{8}{m} deeper than the current sea floor near the harbour with a mean difference of \SI{5}{m}, and is \SI{200}{m} wide. This alteration can be seen in Figure \ref{fig:delta_depth}.
+To evaluate the effect of dredging on the Estuary, the bathymetry is altered to simulate dredging by \SI{8}{m}. The proposed dredged channel is approximately \SI{8}{m} deeper than the current sea floor near the harbour with a mean difference of \SI{5}{m}, and is \SI{200}{m} wide. This alteration to the bathymetry can be seen in Figure \ref{fig:delta_depth}.
 
 \begin{figure}[hbp]
     \centering
@@ -118,7 +118,7 @@ To evaluate the effect of dredging on the Estuary, the bathymetry is altered to 
 
 \subsection{Existing hydrodynamic regime}
 
-Water velocity is maximum for this Estuary during a rising tide, and reaches a magnitude of \SI{8.2}{m.s^{-1}}. The location of the maximum velocity is where the Estuary narrows to \SI{120}{m}. It is not the shallowest or narrowest part of the Estuary, but it is on a bending section and it is nearer the mouth than the narrowest part. The location of the fastest part of the Estuary for a falling tide is in the same place, as can be seen from Figures \ref{fig:global_velocities} and \ref{fig:local_velocities}.
+Water velocity is maximum for this Estuary during a rising tide, and reaches a magnitude of \SI{8.2}{m.s^{-1}}. The location of the maximum velocity is where the Estuary narrows to \SI{120}{m}. It is not the shallowest or narrowest part of the Estuary, but it is on a bending section and it is nearer the mouth than the narrowest part. The location of the fastest part of the Estuary for a falling tide is in a similar place, as can be seen from Figures \ref{fig:global_velocities} and \ref{fig:local_velocities}.
 
 \begin{figure}[!h]
     \centering
@@ -136,7 +136,7 @@ Water velocity is maximum for this Estuary during a rising tide, and reaches a m
 
 \subsection{Effects of dredging}
 
-After dredging, the main change to the hydrodynamic regime is a reduced velocity in the Inlet and Berth areas. This can be seen in Figure \ref{fig:dredging_delta_vel_mag}, where the velocity magnitude at both the Inlet and Berth are substantially reduced during both rising and falling tides. The reduction is biggest at the Berth. Both Mid-estuary and Upstream locations show essentially no change in velocity magnitude under the dredging scenario. For all four locations, the surface water height is almost identical in both scenarios.
+After dredging, the main change to the hydrodynamic regime is a reduced velocity in the Inlet and Berth areas. This can be seen in Figure \ref{fig:dredging_delta_vel_mag}, where the velocity magnitude at both the Inlet and Berth are substantially reduced during both rising and falling tides. The reduction is biggest at the Berth. Both Mid-estuary and Upstream locations show essentially no change in velocity magnitude under the dredging scenario. For all four locations, the surface water height is almost identical in both scenarios, and hence is not shown.
 
 \begin{figure}[!h]
     \centering
@@ -145,7 +145,7 @@ After dredging, the main change to the hydrodynamic regime is a reduced velocity
     \label{fig:dredging_delta_vel_mag}
 \end{figure}
 
-There is an additional effect of dredging, the appearance of a localised area of increased velocity just upstream of the dredging. This is shown in %\ref{fig:dredging_hotspot}. 
+There is an additional effect of dredging: the appearance of a localised area of increased velocity just upstream of the dredging. This is shown in TODO: %\ref{fig:dredging_hotspot}. 
 
 \section{Discussion}
 
@@ -158,8 +158,8 @@ TODO: finish off. Talks about how bathymetric uncertainty can be used to cal mod
 \begin{itemize}
     \item The Fowey Estuary is a macrotidal Estuary that is suitable for being modelled by a two-dimensional shallow water model.
     \item It best modelled by RMA-2 when using a Manning bed friction coefficient of 0.025 and an eddy viscosity of \SI{9000}{ N.s.m^{-2} }.
-    \item The rising tide produces faster water speeds than the falling tide. During the rising tide, peak water speed is about \SI{8.2}{m.s^{-1}}.
-    \item Dredging the Estuary from the Berth out to sea would reduce the maximum speed by about \SI{0.15}{m.s^{-1}} at the Berth, and \SI{0.10}{m.s^{-1}} at the Inlet.
+    \item The rising tide produces faster water speeds than the falling tide. During the rising tide, peak water speed is \SI{8.2}{m.s^{-1}}.
+    \item Dredging the Estuary from the Berth out to sea would reduce the maximum speed by \SI{0.15}{m.s^{-1}} at the Berth, and \SI{0.10}{m.s^{-1}} at the Inlet.
     \item Dredging the Estuary would have little to no effect further upstream of the dredged channel.
 \end{itemize}
 
@@ -188,7 +188,7 @@ The majority of land use is for agriculture (67\%), with forest (18\%), heath (1
 \end{figure}
 
 MIKE SHE is a deterministic, distributed and physically based modelling system for modelling water flow through catchments \parencite{refsgaard1995mike, refsgaard2010systeme}. It can model precipitation, surface runoff, evapotsranspiration, and saturated zone and unsaturated zone subsurface flow. To model river flow it can be coupled to MIKE 11, which models one-dimensional water flow through channels by solving the Saint Venant equations \parencite{havno1995mike}.  
-It uses a finite difference approach to modelling catchments, and can be used with various spatially distributed characteristics such as elevation, land use and soil type. Additionally, the precipitation and evapotsranspiration can be specified for each grid cell in the model \parencite{thompson2012modelling}.
+MIKE SHE uses a finite difference approach to modelling catchments, and can be used with various spatially distributed characteristics such as elevation, land use and soil type. Additionally, the precipitation and evapotsranspiration can be specified for each grid cell in the model \parencite{thompson2012modelling}.
 
 \newpage
 \section{Methodology}
@@ -210,7 +210,7 @@ The topography was imported from a Digital Elevation Model (DEM) file, and was i
 
 \subsubsection{Land cover}
 
-Four land types were defined for the model: grass crops, forest, wetlands and shrubs. Forest, wetlands and shrubs had predefined Leaf Area Indices (LAIs) and Root Depths (RD) shown in Table \ref{table:lai_rd}. Grass crops' LAIs and RDs varied over the course of a year as shown by Figure \ref{fig:grass_variation}. The spatial distribution of the four land types can be seen in Figure \ref{fig:vegetation}.
+Four land types were defined for the model: grass crops, forest, wetlands and shrubs. Forest, wetlands and shrubs had predefined Leaf Area Indices (LAIs) and Root Depths (RDs) shown in Table \ref{table:lai_rd}. Grass crops' LAIs and RDs varied over the course of a year as shown by Figure \ref{fig:grass_variation}. The spatial distribution of the four land types can be seen in Figure \ref{fig:vegetation}.
 
 \setlength\extrarowheight{3pt}
 \begin{table}[!h]
@@ -237,7 +237,7 @@ Four land types were defined for the model: grass crops, forest, wetlands and sh
 \begin{figure}[!h]
     \centering
     \includegraphics[width=9cm]{geogg101_screenshots/practical2/vegetation}
-    \caption{Spatial distribution of the four land types. The indices in the scale are: 1 - Grass crops, 2 - Forest, 3 - Shrubs and 4 - Wetlands. }
+    \caption{Spatial distribution of the four land types. The indices in the key are: 1 - Grass crops, 2 - Forest, 3 - Shrubs and 4 - Wetlands. }
     \label{fig:vegetation}
 \end{figure}
 
@@ -249,7 +249,7 @@ In MIKE SHE the saturated zone (SZ) comprises of layers and lenses. One layer, a
 \begin{figure}[!h]
     \centering
     \includegraphics[width=9cm]{geogg101_screenshots/practical2/clay_horizontal_extent}
-    \caption{Horizontal extent of the clay lenses, which corresponds to index 1 in the scale.}
+    \caption{Horizontal extent of the clay lenses, which corresponds to index 1 in the key.}
     \label{fig:clay_horizontal_extent}
 \end{figure}
 
@@ -277,7 +277,7 @@ The Unsaturated Zone (UZ) is made up of three soil types: fine sand, coarse sand
 
 \subsubsection{Rivers}
 
-Rivers are added into MIKE SHE through a coupling to MIKE 11, a dedicated one dimensional river model. The rivers were added to the model by digitising the path of the river from a map of the area. Five branches were defined: Karup River, Haderup River, Bording Creek, Feldborg Creek and Hauge Creek. Each branch was set up with a chainage and a cross section. In this study, the coupling to MIKE 11 was one way, from MIKE SHE to MIKE 11. That is, all drainage from MIKE SHE flows into MIKE 11 rivers, but if a river were to overflow, it would not flood the surrounding area in MIKE SHE.
+Rivers are added into MIKE SHE through a coupling to MIKE 11, a dedicated one-dimensional river model. The rivers were added to the model by digitising the path of the river from a map of the area. Five branches were defined: Karup River, Haderup River, Bording Creek, Feldborg Creek and Hauge Creek. Each branch was set up with a chainage and a cross section. In this study, the coupling to MIKE 11 was one way, from MIKE SHE to MIKE 11. That is, all drainage from MIKE SHE flows into MIKE 11 rivers, but if a river were to overflow, it would not flood the surrounding area in MIKE SHE.
 
 \subsubsection{Precipitation and evapotsranspiration}
 
@@ -357,7 +357,7 @@ As can be seen in Figure \ref{fig:ctrl_river_regime}, the river simulated river 
 
 \newpage
 
-When looking at the individual graphs for the four boreholes and two discharge stations (Figures \ref{fig:borehole_cal} and \ref{fig:river_cal}), the model appears to match the observations well, both for the calibration and the validation period. (In Figure \ref{fig:river_cal} the simulated line is obscured by the observed.)
+When looking at the individual graphs for the four boreholes and two discharge stations (Figures \ref{fig:borehole_cal} and \ref{fig:river_cal}), the model appears to match the observations well, both for the calibration and the validation period. (In Figure \ref{fig:river_cal} the simulated line is obscured by the observed data.)
 
 \begin{figure}[!h]
     \centering
@@ -410,7 +410,7 @@ The MIKE SHE/MIKE 11 model performed well at reproducing the observations from t
 It had a slight tendency to overestimate the discharge in summer when the discharge was at its lowest, and underestimate it in winter when it was at its highest.
 According the guidelines put forward by \textcite{henriksen2008assessment}, it performs excellently.
 Under a scenario of Low emissions up to 2050, the model predicts that the average monthly discharge at both of the measuring stations will be broadly unchanged.
-Under Medium and High emissions scenarios up to 2050, the model predicts that the average monthly discharge at both of the measuring stations will be higher by about 10\% over the course of the year, with the biggest change in winter.
+Under Medium and High emissions scenarios up to 2050, the model predicts that the average monthly discharge at both of the measuring stations will be higher by 10\% over the course of the year, with the biggest change in winter.
 
 
 \printbibliography[filter=practical2]

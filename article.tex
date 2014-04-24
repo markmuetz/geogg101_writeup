@@ -136,70 +136,157 @@ TODO: finish off. Talks about how bathymatric uncertainty can be used to cal mod
 
 \newpage
 \setcounter{section}{0}
+\setcounter{figure}{0}
 
 % Practical 2:
-\lhead{BTTM8 - SURFACE WATER MODELLING - EFFECTS OF LAND USE/CLIMATE CHANGE}
+\lhead{BTTM8 - SURFACE WATER MODELLING - EFFECTS OF CLIMATE CHANGE ON A CATCHMENT}
 \part*{Modelling the effects of land use change and climate change on a catchment area}
 
 \section{Introduction}
 
 The purpose of this study is to calibrate and validate a model of the Karup Catchment in Denmark. This model will then be used to simulate three future emissions scenarios of climate change in 2050: Low, Medium and High.  
 
-The Karup Catchment is \SI{440}{km^2}. It is situated in western Denmark and drains into the Limfjord. Geologically, it consists of highly permeable sand and gravel as well as occasionaly lenses of clay. 
+The Karup Catchment is \SI{440}{km^2}. It is situated in western Denmark and drains into the Skive Fjord. Geologically, it consists of highly permeable sand and gravel as well as occasionaly lenses of clay. 
 The majority of land use is for agriculture (67\%), with forest (18\%), heath (10\%), wetland (4\%) and urban (1\%) making up the remainder \parencite{refsgaard1997parameterisation}.
 
 % TODO: Location map of Karup in Denmark + locations of boreholes/rivers.
 
-MIKE SHE is a deterministic, distributed and physically based modelling system for modelling water flow through catchments \parencite{refsgaard1995mike, refsgaard2010systeme}. It can model precipitation, surface runoff, evapotsranspiration, and saturated zone and unsaturated zone subsurface flow. It can be coupled to MIKE 11, which models one-dimensional water flow through channels by solving the Saint Venant equations \parencite{havno1995mike}.  
+MIKE SHE is a deterministic, distributed and physically based modelling system for modelling water flow through catchments \parencite{refsgaard1995mike, refsgaard2010systeme}. It can model precipitation, surface runoff, evapotsranspiration, and saturated zone and unsaturated zone subsurface flow. To model river flow it can be coupled to MIKE 11, which models one-dimensional water flow through channels by solving the Saint Venant equations \parencite{havno1995mike}.  
 It uses a finite difference approach to modelling catchments, and  and can be used with various spatially distributed characteristics such as elevation, land use and soil type. Additionally, the precipitation and evapotsranspiration can be specified for each grid cell in the model \parencite{thompson2012modelling}.
-
 
 % TODO: Mike she schematic figure (maybe from thompson2004application).
 
+\newpage
 \section{Methodology}
 
 \subsection{Model setup}
 
-\subsubsection{Topology}
+The model used grid cells of size \SI{500}{m} x \SI{500}{m}.
+
+\subsubsection{Topography}
+
+The topography was imported from a Digital Elevation Model (DEM) file, and was interpolated onto the model grid using bilinear interpolation. The topography can be seen in Figure \ref{fig:topography}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[height=10cm]{geogg101_screenshots/practical2/topography}
+    \caption{Topography for the region shown after it has been interpolated onto the model grid.}
+    \label{fig:topography}
+\end{figure}
 
 \subsubsection{Land cover}
 
-\subsubsection{Unsaturated zone}
+Four land types were defined for the model: grass crops, forest, wetlands and shrubs. Forest, wetlands and shrubs had predefined Leaf Area Indices (LAIs) and Root Depths (RD) shown in Table \ref{table:lai_rd}. Grass crops' LAIs and RDs varied over the course of a year as shown by Figure \ref{fig:grass_variation}. The spatial distribution of the four land types can be seen in Figure \ref{fig:vegetation}.
+
+\setlength\extrarowheight{3pt}
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{l c c}
+	Land type   & LAI & RD (\SI{}{mm}) \\
+	    \hline
+	    Forest & \num{6} & \num{800} \\
+	    Wetlands & \num{4} & \num{500} \\
+	    Shrubs & \num{2} & \num{440} \\
+    \end{tabular}
+    \caption{LAI and RD for three of the land types.}
+    \label{table:lai_rd}
+\end{table}
+
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{geogg101_screenshots/practical2/grass_variation}
+    \caption{Grass crops' LAI and RD over the full course of the simulation.}
+    \label{fig:grass_variation}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=9cm]{geogg101_screenshots/practical2/vegetation}
+    \caption{Spatial distribution of the four land types. The indices in the scale are: 1 - Grass crops, 2 - Forest, 3 - Shrubs and 4 - Wetlands. }
+    \label{fig:vegetation}
+\end{figure}
+
 
 \subsubsection{Saturated zone}
 
+In MIKE SHE the saturated zone (SZ) comprises of layers and lenses. One layer, a sand aquifer, was defined, as well as one set of clay lenses. Both of these were defined through the use of a DEM, similar to how the topography was set up. The horizontal extent of the clay lenses can be seen in Figure \ref{fig:clay_horizontal_extent}. Various hydrological properties were assigned for the aquifer and the clay lenses, such as horizontal and vertical hydraulic conductivities (see Section \ref{sec:calibration} for more details on the values used for the hydraulic conductivities).
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=9cm]{geogg101_screenshots/practical2/clay_horizontal_extent}
+    \caption{Horizontal extent of the clay lenses, which corresponds to index 1 in the scale.}
+    \label{fig:clay_horizontal_extent}
+\end{figure}
+
+\subsubsection{Unsaturated zone}
+
+The Unsaturated Zone (UZ) is made up of three soil types: fine sand, coarse sand and a mixture of fine/course sand. For each soil type, a series of layers at different depths was defined, going down to \SI{37}{m}. The levels and number of layes for each depth can be seen in Table \ref{table:uz_depths}. The way these layers are defined, with the highest density of layers found nearest the surface, means that the subsurface layer receives the most computational effort during the model run.
+
+\setlength\extrarowheight{3pt}
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{c c c}
+	Depth (\SI{}{m})  & Layer height (\SI{}{m}) & Number of layers \\
+	    \hline
+	    1 & 0.1 & 10 \\
+	    3 & 0.2 & 10 \\
+	    6 & 0.3 & 10 \\
+	    10 & 0.4 & 10 \\
+	    37 & 0.5 & 54 \\
+    \end{tabular}
+    \caption{Layers of the UZ, with the number of layers and their height shown.}
+    \label{table:uz_depths}
+\end{table}
+
+
+
 \subsubsection{Rivers}
+
+Rivers are added into MIKE SHE through a coupling to MIKE 11, a dedicated one dimensional river model. The rivers were added to the model by digitising the path of the river from a map of the area. Five branches were defined: Karup River, Haderup River, Bording Creek, Feldborg Creek and Hauge Creek. Each branch was set up with a chainage and a cross section. In this study, the coupling to MIKE 11 was one way, from MIKE SHE to MIKE 11. That is, all drainage from MIKE SHE flows into MIKE 11 rivers, but if a river were to overflow, it would not flood the surrounding area in MIKE SHE.
 
 \subsubsection{Precipitation and evapotsranspiration}
 
+Precipitation was defined for the nine areas shown in Figure \ref{fig:precip_areas}. Each area contained a measuring station, which provided precipitation values in the form of a time series for those grid cells nearest to it. Evapotransipiration was defined with a single time series, which provided values for this variable over the entire catchment.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=9cm]{geogg101_screenshots/practical2/precip_areas}
+    \caption{Precipitation areas based on the measuring station in the cathcment.}
+    \label{fig:precip_areas}
+\end{figure}
+
+
 \subsubsection{Run control}
+The model was run from 01/01/1970 to 31/12/1980. No results were derived from the first year, 1970, which was used as spin-up time for the model. The next five years, 01/01/1971 to 31/12/1975, were used to calibrate the model, and the final five were used to validate the model. (See Section \ref{sec:calibration} for details.) The model was run with a timestep of (TODO: Not sure find out!).
 
-\subsection{Calibration}
+\subsection{Calibration and validation}
+\label{sec:calibration}
 
-As can be seen in Table \ref{table:summary_stats}, \dots
+MIKE SHE is typically calibrated by modifying the parameters listed in Table \ref{table:calibration_parameters} \parencite{refsgaard1997parameterisation, thompson2004simulation}. Following \textcite{klemevs1986operational}, the split-sample method was used. The calibration period was from 01/01/1971 to 31/12/1975, and the validation period was from 01/01/1976 to 31/12/1980. One year, 1970, was used for model spin-up time. 
 
-MIKE SHE is typically calibrated by modifying the parameters listed in Table \ref{table:calibration_parameters} \parencite{refsgaard1997parameterisation, thompson2004simulation}.
+The calibration procedure used was to modify one parameter at a time, looking for the best fit with observations at the four boreholes and two river discharge stations by examining the Root Mean Squared Error (RMSE), Nash-Sutcliffe Equation (NSE, see \textcite{nash1970river}) and Pearson's correlation coefficient (R). Once a value for e.g. ``Horizontal hydraulic conductivity of sand aquifer'' had been chosen, the same procedure would be used for the next parameter in the table: ``Vertical hydraulic conductivity of sand aquifer''. The chosen values for each of the four parameters can be seen in \ref{table:calibration_parameters}, and the corresponding summary statistics are tabulated in Table \ref{table:summary_stats}.
 
+\setlength\extrarowheight{3pt}
 \begin{table}[!h]
     \centering
-    \label{table:calibration_parameters}
-    \begin{tabular}{l c c}
-	Parameter   & Minimum \SI{}{m.s^{-1}} & Maximum \SI{}{m.s^{-1}} \\
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill} } l c c c}
+	& Minimum & Maximum & Chosen \\
+	Parameter   & (\SI{}{m.s^{-1}}) & (\SI{}{m.s^{-1}}) & (\SI{}{m.s^{-1}}) \\
 	    \hline
-	    Horizontal hydraulic condictivity of sand aquifer  & \num{1e-4} & \num{9e-4} \\
-	    Vertical hydraulic condictivity of sand aquifer    & \num{1e-5} & \num{9e-5} \\
-	    Horizontal hydraulic condictivity of clay lenses   & \num{1e-6} & \num{9e-6} \\
-	    Vertical hydraulic condictivity of clay lenses     & \num{1e-7} & \num{9e-7} \\
-    \end{tabular}
-    \caption{Calibration parameters and the range of appropriate values.}
+	    Horizontal hydraulic condictivity of sand aquifer  & \num{1e-4} & \num{9e-4} & \num{3.9e-4} \\
+	    Vertical hydraulic condictivity of sand aquifer    & \num{1e-5} & \num{9e-5} & \num{8e-5}\\
+	    Horizontal hydraulic condictivity of clay lenses   & \num{1e-6} & \num{9e-6} & \num{1e-6}\\
+	    Vertical hydraulic condictivity of clay lenses     & \num{1e-7} & \num{9e-7} & \num{2e-7}\\
+    \end{tabular*}
+    \caption{Calibration parameters, the range of appropriate values, and the chosen value.}
+    \label{table:calibration_parameters}
 \end{table}
 
-Using the split-sample method of \textcite{klemevs1986operational}.
-
 \begin{table}[!h]
     \centering
-    \label{table:summary_stats}
-    \begin{tabular}{l c c c c c c}
+    \resizebox{\textwidth}{!}{\begin{minipage}{\textwidth}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill} } l c c c c c c}
 	& \multicolumn{3}{c}{Calibration} & \multicolumn{3}{c}{Validation} \\
 		    & RMSE & NSE  & R    & RMSE & NSE  & R    \\
 	    \hline
@@ -211,20 +298,59 @@ Using the split-sample method of \textcite{klemevs1986operational}.
 	Karup       & 0.16 & 0.95 & 0.98 & 0.17 & 0.97 & 0.99 \\
 	Hagebro     & 0.06 & 0.92 & 0.97 & 0.07 & 0.92 & 0.97 \\
 
-    \end{tabular}
-    \caption{Summary statistics comparing the observed and simulated values for the four boreholes and two rivers. The calibration period was from 1971 to 1975 and the validation period was from 1976 to 1981.}
+    \end{tabular*}
+    \caption{Summary statistics comparing the observed and simulated values for the four boreholes and two rivers. The calibration period was 01/01/1971 - 31/12/1975 and the validation period was 01/01/1976 - 31/12/1980.}
+    \label{table:summary_stats}
+\end{minipage} }
 \end{table}
 
-\subsection{Scenarios}
+\subsection{Climate change scenario}
 
-\subsubsection{Changing land use}
+To simulate climate change in 2050, three different emissions scenarios were used. These were Low, Medium and High, and for each one of these new preipitation and evapotsranspiration time series were produced (one for each station in the case of precipitation). The model was then re-run with these new input data.
 
-\subsubsection{Climate change}
-
+\newpage
 \section{Results}
 
-\subsection{Effects of land use change}
+\subsection{Modelled river regime}
 
+Below are some figures which demonstrate the fit between the modelled and observed values.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=15cm]{geogg101_screenshots/practical2/borehole_cal}
+    \caption{Simulated (blue line) plotted against observed (black crosses) for the four boreholes.}
+    \label{fig:borehole_cal}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=15cm]{geogg101_screenshots/practical2/river_cal}
+    \caption{Simulated (blue line) plotted against observed (black crosses) for the two rivers.}
+    \label{fig:river_cal}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=15cm]{geogg101_screenshots/practical2/borehole_scatter}
+    \caption{Scatter graphs of observed (horizontal axis) vs simulated (vertical axis) for each of the four boreholes and the calibration/validation periods. The blue line shows the line of best fit and the corresponding R value is shown. All values are in \SI{}{metres}.}
+    \label{fig:borehole_scatter}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=15cm]{geogg101_screenshots/practical2/river_scatter}
+    \caption{Scatter graphs of observed (horizontal axis) vs simulated (vertical axis) for both rivers and the calibration/validation periods. The blue line shows the line of best fit and the corresponding R value is shown. All values are in \SI{}{cumecs}.}
+    \label{fig:river_scatter}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=15cm]{geogg101_screenshots/practical2/ctrl_river_regime}
+    \caption{Simulated and observed river regimes calulcated over the combined calibration and validation periods.}
+    \label{fig:ctrl_river_regime}
+\end{figure}
+
+\newpage
 \subsection{Effects of climate change}
 
 \section{Conclusions}

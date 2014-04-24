@@ -42,7 +42,7 @@
 
 The purpose of this study is to implement a surface water model of the Fowey Estuary. This model is then used to characterise the existing hydrodynamic regime of the Estuary, analyse the sensitivity of the model to changes in the bed friction and evaluate the changes to the regime under a dredging scenario. % drop sensitivity?
 
-The Fowey Estuary is a macrotidal estuary with a mean spring tidal range of \SI{4.8}{\m} and a tidal length of \SI{12}{km} \parencite{uncles2002dependence}. It is located in Cornwall on the south coast of England (see Figure \ref{fig:fowey_estuary_map}). It is fed by two rivers, the Fowey and the Lerryn, with mean discharges of \SI{1.5}{cumecs} and \SI{0.8}{cumecs} respectively. It is tidally dominated, although the contributions of both these rivers was included.
+The Fowey Estuary is a macrotidal estuary with a mean spring tidal range of \SI{4.8}{\m} and a tidal length of \SI{12}{km} \parencite{uncles2002dependence}. It is located in Cornwall on the south coast of England (see Figure \ref{fig:fowey_estuary_map}). It is fed by two rivers, the Fowey and the Lerryn, with mean discharges of \SI{1.5}{cumecs} and \SI{0.8}{cumecs} respectively. It is tidally dominated, although the contributions of both these rivers were included.
 
 The Estuary is modelled using RMA-2, a two-dimensional depth averaged numerical model that calculates water surface elevation and horizontal velocity components at each timestep \parencite{king1990program}.
 The governing equation that is solved is a two-dimensional shallow water equation (2D-SWE). The 2D-SWE is a formulation of the Reynolds averaged Navier-Stokes equation, obtained by integrating it over the vertical coordinate. The 2D-SWE also assumes a hydrostatic pressure distribution, and that the horizontal extent of the model is much larger than the vertical one \parencite{cea2006numerical}.
@@ -116,6 +116,39 @@ To evaluate the effect of dredging on the Estuary, the bathymetry is altered to 
 \end{figure}
 
 \newpage
+\section{Results and analysis}
+
+\subsection{Existing hydrodynamic regime}
+
+Water velocity is maximum for this Estuary during a rising tide, and reaches a magnitude of \SI{8.2}{m/s}. The location of the maximum velocity is where the Estuary narrows to \SI{120}{m}. It is not the shallowest or narrowest part of the Estuary, but it is on a bending section and it is nearer the mouth than the narrowest part. The location of the fastest part of the Estuary for a falling tide is in the same place, as can be seen from Figures \ref{fig:global_velocities} and \ref{fig:local_velocities}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=15cm]{geogg101_screenshots/practical1/global_vec_velocity_mag}
+    \caption{Maximum velocities for rising (left) and falling (right) tides. Scale on left is in \SI{}{m/s}.}
+    \label{fig:global_velocities}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=15cm]{geogg101_screenshots/practical1/local_vec_velocity_mag}
+    \caption{Local maximum velocities for rising (left) and falling (right) tides showing the fastest point of the river. Scale on left is in \SI{}{m/s}.}
+    \label{fig:local_velocities}
+\end{figure}
+
+\subsection{Effects of dredging}
+
+After dredging, the main change to the hydrodynamic regime is a reduced velocity in the Inlet and Berth areas. This can be seen in Figure \ref{fig:dredging_delta_vel_mag}, where the velocity magnitude at both the Inlet and Berth are substanitally reduced diring both rising and falling tides. The reduction is biggest at the Berth. Both Mid-estuary and Upstream locations show essentially no change in velocity magnitude under the dredging scenario. For all four locations, the surface water height is almost identical in both scenarios.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\linewidth]{geogg101_screenshots/practical1/dredging_delta_vel_mag}
+    \caption{Difference between original and dredged velocity magnitude, with surface water level shown for reference.}
+    \label{fig:dredging_delta_vel_mag}
+\end{figure}
+
+There is an additional effect of dredging, the appearance of a localised area of increased velocity just upstream of the dredging. This is shown in %\ref{fig:dredging_hotspot}. 
+
 \section{Discussion}
 
 TODO: finish off. Talks about how bathymatric uncertainty can be used to cal model: \textcite{cea2012bathymetric}

@@ -182,12 +182,15 @@ The purpose of this study is to calibrate and validate a model of the Karup Catc
 The Karup Catchment is \SI{440}{km^2}. It is situated in western Denmark and drains into the Skive Fjord. Geologically, it consists of highly permeable sand and gravel as well as occasionaly lenses of clay. 
 The majority of land use is for agriculture (67\%), with forest (18\%), heath (10\%), wetland (4\%) and urban (1\%) making up the remainder \parencite{refsgaard1997parameterisation}.
 
-% TODO: Location map of Karup in Denmark + locations of boreholes/rivers.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[height=8cm]{geogg101_screenshots/practical2/karup_catchment_with_boreholes}
+    \caption{Location of Karup Catchment in Denmark, with the main rivers and the four boreholes used for observation shown. Adapted from \textcite{blasone2008uncertainty}.}
+    \label{fig:karup_catchment}
+\end{figure}
 
 MIKE SHE is a deterministic, distributed and physically based modelling system for modelling water flow through catchments \parencite{refsgaard1995mike, refsgaard2010systeme}. It can model precipitation, surface runoff, evapotsranspiration, and saturated zone and unsaturated zone subsurface flow. To model river flow it can be coupled to MIKE 11, which models one-dimensional water flow through channels by solving the Saint Venant equations \parencite{havno1995mike}.  
 It uses a finite difference approach to modelling catchments, and  and can be used with various spatially distributed characteristics such as elevation, land use and soil type. Additionally, the precipitation and evapotsranspiration can be specified for each grid cell in the model \parencite{thompson2012modelling}.
-
-% TODO: Mike she schematic figure (maybe from thompson2004application).
 
 \newpage
 \section{Methodology}
@@ -316,6 +319,13 @@ The calibration procedure used was to modify one parameter at a time, looking fo
     \label{table:calibration_parameters}
 \end{table}
 
+\newpage
+\section{Results}
+
+\subsection{Modelled river regime}
+
+According to the guidelines provided by \textcite{henriksen2008assessment}, an NSE greater than $0.85$ should be considered as having an `excellent' fit with the observed data. For the validation period and the two discharge stations in Table \ref{table:summary_stats}, their values for NSE are $0.97$ and $0.92$, so the fit with the observed data is `excellent'
+
 \begin{table}[!h]
     \centering
     \resizebox{\textwidth}{!}{\begin{minipage}{\textwidth}
@@ -337,54 +347,57 @@ The calibration procedure used was to modify one parameter at a time, looking fo
 \end{minipage} }
 \end{table}
 
-\subsection{Climate change scenario}
-
-To simulate climate change in 2050, three different emissions scenarios were used. These were Low, Medium and High, and for each one of these new preipitation and evapotsranspiration time series were produced (one for each station in the case of precipitation). The model was then re-run with these new input data.
-
-\newpage
-\section{Results}
-
-\subsection{Modelled river regime}
-
-Below are some figures which demonstrate the fit between the modelled and observed values.
+As can be seen in Figure \ref{fig:ctrl_river_regime}, the river simulated river regime also matches the observed regime quite closely. The largest discrepency is during August for the Hagebro discharge station, when the simulated results overestimate the monthly discharge by 8\%. In general, the model tends to overestimate the discharge in the summer months when the discharge is at its lowest. Likewise, it underestimates the discharge in the winter months when the discharge is at its highest.
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=15cm]{geogg101_screenshots/practical2/borehole_cal}
+    \includegraphics[height=9cm]{geogg101_screenshots/practical2/ctrl_river_regime}
+    \caption{Simulated and observed river regimes calculated over the combined calibration and validation periods.}
+    \label{fig:ctrl_river_regime}
+\end{figure}
+
+
+\newpage
+
+When looking at the individual graphs for the four boreholes and two discharge stations (Figures \ref{fig:borehole_cal} and \ref{fig:river_cal}), the model appears to match the observations well, both for the calibration and the validation period. (In Figure \ref{fig:river_cal} the simulated line is obscured by the observed.)
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=14.5cm]{geogg101_screenshots/practical2/borehole_cal}
     \caption{Simulated (blue line) plotted against observed (black crosses) for the four boreholes.}
     \label{fig:borehole_cal}
 \end{figure}
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=15cm]{geogg101_screenshots/practical2/river_cal}
+    \includegraphics[width=14.5cm]{geogg101_screenshots/practical2/river_cal}
     \caption{Simulated (blue line) plotted against observed (black crosses) for the discharge stations.}
     \label{fig:river_cal}
 \end{figure}
 
+
+\newpage
+Scatter graphs of the boreholes and discharge station again show that the model performs reasonably well at reproducing the observed data, with relatively few outliers visible. It backs up the findings from Figure \ref{fig:ctrl_river_regime} that the model overestimates the periods of low flow (summer) and underestimates those of high (winter), which can be seen by the gradient of the lines of best fit which are less than one.
+
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=15cm]{geogg101_screenshots/practical2/borehole_scatter}
+    \includegraphics[width=12cm]{geogg101_screenshots/practical2/borehole_scatter}
     \caption{Scatter graphs of observed (horizontal axis) vs simulated (vertical axis) for each of the four boreholes and the calibration/validation periods. The blue line shows the line of best fit and the corresponding R value is shown. All values are in \SI{}{metres}.}
     \label{fig:borehole_scatter}
 \end{figure}
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=15cm]{geogg101_screenshots/practical2/river_scatter}
+    \includegraphics[width=12cm]{geogg101_screenshots/practical2/river_scatter}
     \caption{Scatter graphs of observed (horizontal axis) vs simulated (vertical axis) for both rivers and the calibration/validation periods. The blue line shows the line of best fit and the corresponding R value is shown. All values are in \SI{}{cumecs}.}
     \label{fig:river_scatter}
 \end{figure}
 
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=15cm]{geogg101_screenshots/practical2/ctrl_river_regime}
-    \caption{Simulated and observed river regimes calculated over the combined calibration and validation periods.}
-    \label{fig:ctrl_river_regime}
-\end{figure}
-
 \newpage
+
 \subsection{Effects of climate change}
+
+To simulate climate change in 2050, three different emissions scenarios were used. These were Low, Medium and High, and for each one of these new preipitation and evapotsranspiration time series were produced (one for each station in the case of precipitation). The calibrated model was then re-run with these new input data. Under these three different emissions scenarios, the river regime deviated from its original regime, as can be seen in Figure \ref{fig:effects_of_cc}. Each of the regimes is plotted against the simulated calibration/validation regime (CVR), not the observed data. The Medium and High scenarios both show significant deviation from the CVR, with the effect being largest in the winter when the discharge is greatest. The Low scenario does show deviation from the CVR, although not nearly as markedly.
 
 \begin{figure}[!h]
     \centering

@@ -63,7 +63,7 @@ The model used was two-dimensional depth averaged tidal model named RMA-2 \paren
 \subsection{Model setup}
 
 \subsubsection{Mesh}
-A mesh of the Estuary was created by digitizing the coastline and banks of the rivers. This was resampled at \SI{30}{m} to give an element size of the same order. Beyond the mouth of the Estuary a larger element size of \SI{50}{m} was used. The meshed area, as well as a close-up of a typical section and the transition at the mouth of the Estuary, can be seen in Figure \ref{fig:combined_meshes}. In total, XX \SI{30}{m} elements and YY \SI{50}{m} elements were used. Before running the model, a quality check of the mesh was performed by SMS. There were XX `size changed' warnings, but apart from these the mesh met SMS' quality criteria.
+A mesh of the Estuary was created by digitizing the coastline and banks of the rivers. This was resampled at \SI{30}{m}, and when SMS' `Adaptive Tesselation' algorithm was applied this gave an element size of the same order. Beyond the mouth of the Estuary a larger element size of \SI{50}{m} was used. The meshed area, as well as a close-up of a typical section and the transition at the mouth of the Estuary, can be seen in Figure \ref{fig:combined_meshes}. In total, 5294 \SI{30}{m} elements covering an area of \SI{2.74}{km^{2}}, and 662 \SI{50}{m} elements covering an area of \SI{0.74}{km^{2}} were used. Before running the model, a quality check of the mesh was performed by SMS. There were 17 `Size Changed' warnings, and 28 `Maximum Slope' warnings. 9 of the `Size Changed' warning occured on the boundary between the \SI{50}{m} and \SI{30}{m} elements. Apart from these the mesh met SMS' quality criteria.
 
 
 \begin{figure}[hbp]
@@ -74,7 +74,7 @@ A mesh of the Estuary was created by digitizing the coastline and banks of the r
 \end{figure}
 
 \subsubsection{Bathymetry}
-The bathymetry used was \ldots. The bathymetry was interpolated onto the mesh using \dots.
+A representative sample of the bathymetry used was is shown in Figure TODO. The bathymetry was interpolated onto the mesh using the nearest four nodes for each data point, the result of which can also be seen in Figure TODO.
 
 \subsubsection{Boundary conditions}
 At the influx of the Fowey and Lerryn Rivers, mean discharges perpendicular to the boundaries of \SI{1.5}{cumecs} and \SI{0.8}{cumecs} respectively were specified. At the sea boundary, water level was prescribed using an observed time series of tidal levels for the Estuary.
@@ -104,7 +104,7 @@ Where $O_t$ is the observed value at timestep $t$, $M_t$ is the measured value, 
 
 \subsection{Dredging scenario}
 
-To evaluate the effect of dredging on the Estuary, the bathymetry is altered to simulate dredging by \SI{8}{m}. The proposed dredged channel is \SI{9}{m} deeper than the current sea floor near the harbour with a mean difference of \SI{8}{m}, and is \SI{200}{m} wide. This alteration to the bathymetry can be seen in Figure \ref{fig:delta_depth}.
+To evaluate the effect of dredging on the Estuary, the bathymetry is altered to simulate dredging to a depth of \SI{8}{m} below the water surface. The proposed dredged channel is \SI{9}{m} deep (\SI{6.3}{m} deeper than it is currently) near the harbour with a mean depth of \SI{8}{m}, and is approximately \SI{120}{m} wide. This alteration to the bathymetry can be seen in Figure \ref{fig:delta_depth}.
 
 \begin{figure}[hbp]
     \centering
@@ -157,6 +157,9 @@ Constant discharge.
 
 Eddy viscosity.
 
+Element area change: 17 (8 on 30-50 boundary)
+Max slopes: 28
+
 \section{Conclusions}
 
 % From handout: bullet points will do here.
@@ -188,8 +191,8 @@ The majority of land use is for agriculture (67\%), with forest (18\%), heath (1
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[height=8cm]{geogg101_screenshots/practical2/karup_catchment_with_boreholes}
-    \caption{Location of Karup Catchment in Denmark, with the main rivers and the four boreholes used for observation shown. Adapted from \textcite{blasone2008uncertainty}.}
+    \includegraphics[height=8cm]{geogg101_screenshots/practical2/karup_catchment_with_boreholes_and_discharge}
+    \caption{Location of Karup Catchment in Denmark, with the main rivers and the four boreholes and two discharge stations at Hagebro and Karup used for observation shown. Adapted from \textcite{blasone2008uncertainty}.}
     \label{fig:karup_catchment}
 \end{figure}
 

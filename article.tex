@@ -74,7 +74,14 @@ A mesh of the Estuary was created by digitizing the coastline and banks of the r
 \end{figure}
 
 \subsubsection{Bathymetry}
-A representative sample of the bathymetry used was is shown in Figure TODO. The bathymetry was interpolated onto the mesh using the nearest four nodes for each data point, the result of which can also be seen in Figure TODO.
+A representative sample of the bathymetry used was is shown in Figure \ref{fig:raw_to_interp_bathymetry}. The bathymetry was interpolated onto the mesh using the nearest four nodes for each data point, the result of which can also be seen in Figure \ref{fig:raw_to_interp_bathymetry}.
+
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=15cm]{geogg101_screenshots/practical1/raw_to_interp_bathymetry}
+    \caption{Observed bathymetry (top) and the corresponding bathymetry after it has been interpolated onto the model mesh (bottom). Scale is in \SI{}{m}.}
+    \label{fig:raw_to_interp_bathymetry}
+\end{figure}
 
 \subsubsection{Boundary conditions}
 At the influx of the Fowey and Lerryn Rivers, mean discharges perpendicular to the boundaries of \SI{1.5}{cumecs} and \SI{0.8}{cumecs} respectively were specified. At the sea boundary, water level was prescribed using an observed time series of tidal levels for the Estuary.
@@ -102,6 +109,7 @@ Where $O_t$ is the observed value at timestep $t$, $M_t$ is the measured value, 
     \label{fig:calibration_stats}
 \end{figure}
 
+\newpage
 \subsection{Dredging scenario}
 
 To evaluate the effect of dredging on the Estuary, the bathymetry is altered to simulate dredging to a depth of \SI{8}{m} below the water surface. The proposed dredged channel is \SI{9}{m} deep (\SI{6.3}{m} deeper than it is currently) near the harbour with a mean depth of \SI{8}{m}, and is approximately \SI{120}{m} wide. This alteration to the bathymetry can be seen in Figure \ref{fig:delta_depth}.
@@ -146,6 +154,13 @@ After dredging, the main change to the hydrodynamic regime is a reduced velocity
 \end{figure}
 
 There is an additional effect of dredging: the appearance of a localised area of increased velocity just upstream of the dredging. This is shown in TODO: %\ref{fig:dredging_hotspot}. 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\linewidth]{geogg101_screenshots/practical1/delta_vel_mag_depth}
+    \caption{Difference between original and dredged velocity magnitude, with surface water level shown for reference.}
+    \label{fig:delta_vel_mag_depth}
+\end{figure}
 
 \section{Discussion}
 

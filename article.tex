@@ -38,11 +38,11 @@
 
 \section{Introduction}
 
-The purpose of this study is to implement a surface water model of the Fowey Estuary. This model is then used to characterise the existing hydrodynamic regime of the Estuary, analyse the sensitivity of the model to changes in the bed friction and evaluate the changes to the regime under a dredging scenario. % drop sensitivity?
+The purpose of this study is to implement a surface water model of the Fowey Estuary. This model is then used to characterise the existing hydrodynamic regime of the estuary, analyse the sensitivity of the model to changes in the bed friction and evaluate the changes to the regime under a dredging scenario. % drop sensitivity?
 
 The Fowey Estuary is a macrotidal estuary with a mean spring tidal range of \SI{4.8}{\m} and a tidal length of \SI{12}{km} \parencite{uncles2002dependence}. It is located in Cornwall on the south coast of England (see Figure \ref{fig:fowey_estuary_map}). It is fed by two rivers, the Fowey and the Lerryn, with mean discharges of \SI{1.5}{cumecs} and \SI{0.8}{cumecs} respectively. It is tidally dominated, although the contributions of both these rivers were included.
 
-The Estuary is modelled using RMA-2, a two-dimensional depth averaged numerical model that calculates water surface elevation and horizontal velocity components at each timestep \parencite{king1990program}.
+The estuary is modelled using RMA-2, a two-dimensional depth averaged numerical model that calculates water surface elevation and horizontal velocity components at each timestep \parencite{king1990program}.
 The governing equation that is solved is a two-dimensional shallow water equation (2D-SWE). The 2D-SWE is a formulation of the Reynolds averaged Navier-Stokes equation, obtained by integrating it over the vertical coordinate. The 2D-SWE also assumes a hydrostatic pressure distribution, and that the horizontal extent of the model is much larger than the vertical one \parencite{cea2006numerical}.
 It uses an implicit finite element numerical integration scheme on an unstructured mesh, and because of the integration scheme used it is numerically stable. Turbulence is modelled using an eddy viscosity approximation. Friction is modelled using the Manning bed friction coefficient.
 
@@ -63,7 +63,7 @@ The model used was two-dimensional depth averaged tidal model named RMA-2 \paren
 \subsection{Model setup}
 
 \subsubsection{Mesh}
-A mesh of the Estuary was created by digitizing the coastline and banks of the rivers. This was resampled at \SI{30}{m}, and when SMS' `Adaptive Tesselation' algorithm was applied this gave an element size of the same order. Beyond the mouth of the Estuary a larger element size of \SI{50}{m} was used. The meshed area, as well as a close-up of a typical section and the transition at the mouth of the Estuary, can be seen in Figure \ref{fig:combined_meshes}. In total, 5294 \SI{30}{m} elements covering an area of \SI{2.74}{km^{2}}, and 662 \SI{50}{m} elements covering an area of \SI{0.74}{km^{2}} were used. Before running the model, a quality check of the mesh was performed by SMS. There were 17 `Size Changed' warnings, and 28 `Maximum Slope' warnings. 9 of the `Size Changed' warning occured on the boundary between the \SI{50}{m} and \SI{30}{m} elements. Apart from these the mesh met SMS' quality criteria.
+A mesh of the estuary was created by digitizing the coastline and banks of the rivers. This was resampled at \SI{30}{m}, and when SMS' `Adaptive Tesselation' algorithm was applied this gave an element size of the same order. Beyond the mouth of the estuary a larger element size of \SI{50}{m} was used. The meshed area, as well as a close-up of a typical section and the transition at the mouth of the estuary, can be seen in Figure \ref{fig:combined_meshes}. In total, 5294 \SI{30}{m} elements covering an area of \SI{2.74}{km^{2}}, and 662 \SI{50}{m} elements covering an area of \SI{0.74}{km^{2}} were used. Before running the model, a quality check of the mesh was performed by SMS. There were 17 `Size Changed' warnings, and 28 `Maximum Slope' warnings. 9 of the `Size Changed' warning occured on the boundary between the \SI{50}{m} and \SI{30}{m} elements. Apart from these the mesh met SMS' quality criteria.
 
 
 \begin{figure}[hbp]
@@ -84,7 +84,7 @@ A representative sample of the bathymetry used was is shown in Figure \ref{fig:r
 \end{figure}
 
 \subsubsection{Boundary conditions}
-At the influx of the Fowey and Lerryn Rivers, mean discharges perpendicular to the boundaries of \SI{1.5}{cumecs} and \SI{0.8}{cumecs} respectively were specified. At the sea boundary, water level was prescribed using an observed time series of tidal levels for the Estuary.
+At the influx of the Fowey and Lerryn Rivers, mean discharges perpendicular to the boundaries of \SI{1.5}{cumecs} and \SI{0.8}{cumecs} respectively were specified. At the sea boundary, water level was prescribed using an observed time series of tidal levels for the estuary.
 
 \subsubsection{Run control}
 The model was run for \SI{74}{hours} with a \SI{15}{minute} timestep. It was run from a coldstart, with the initial water level at the sea boundary being set to \SI{-0.72}{m}. 
@@ -99,7 +99,7 @@ Following \textcite{piedra2007residual, sousa2007hydrodynamic}, the  Manning bed
     NSE  &= 1 - \frac{\sum_{t = 1}^N ( O_t - M_t) ^ 2 }{\sum_{t = 1}^N ( O_t - O_{mean}) ^ 2 }
 \end{align*}
 
-Where $O_t$ is the observed value at timestep $t$, $M_t$ is the measured value, and $N$ is the number of timesteps. The results can be seen if Figure \ref{fig:calibration_stats}. From these four graphs it is clear that the value of $n$ that gives best fit with the observed data is $n = 0.025$, and this value was used for the subsequent models. The two values of $NSE = 0.956, 0.997$ both represent `excellent' fit with data according to the guidelines provided by \textcite{henriksen2008assessment} because they are greater than $0.85$. 
+Where $O_t$ is the observed value at timestep $t$, $M_t$ is the measured value, and $N$ is the number of timesteps. The results can be seen in Figure \ref{fig:calibration_stats}. From these four graphs it is clear that the value of $n$ that gives best fit with the observed data is $n = 0.025$, and this value was used for the subsequent models. The two values of $NSE = 0.956, 0.997$ both represent `excellent' fit with data according to the guidelines provided by \textcite{henriksen2008assessment} because they are greater than $0.85$. 
 
 
 \begin{figure}[hbp]
@@ -112,7 +112,7 @@ Where $O_t$ is the observed value at timestep $t$, $M_t$ is the measured value, 
 \newpage
 \subsection{Dredging scenario}
 
-To evaluate the effect of dredging on the Estuary, the bathymetry is altered to simulate dredging to a depth of \SI{8}{m} below the water surface. The proposed dredged channel is \SI{9}{m} deep (\SI{6.3}{m} deeper than it is currently) near the harbour with a mean depth of \SI{8}{m}, and is approximately \SI{120}{m} wide. This alteration to the bathymetry can be seen in Figure \ref{fig:delta_depth}.
+To evaluate the effect of dredging on the estuary, the bathymetry is altered to simulate dredging to a depth of \SI{8}{m} below the water surface. The proposed dredged channel is \SI{9}{m} deep (\SI{6.3}{m} deeper than it is currently) near the harbour with a mean depth of \SI{8}{m}, and is approximately \SI{120}{m} wide. This alteration to the bathymetry can be seen in Figure \ref{fig:delta_depth}.
 
 \begin{figure}[hbp]
     \centering
@@ -126,7 +126,7 @@ To evaluate the effect of dredging on the Estuary, the bathymetry is altered to 
 
 \subsection{Existing hydrodynamic regime}
 
-Water velocity is maximum for this Estuary during a rising tide, and reaches a magnitude of \SI{8.2}{m.s^{-1}}. The location of the maximum velocity is where the Estuary narrows to \SI{120}{m}. It is not the shallowest or narrowest part of the Estuary, but it is on a bending section and it is nearer the mouth than the narrowest part. The location of the fastest part of the Estuary for a falling tide is in a similar place, as can be seen from Figures \ref{fig:global_velocities} and \ref{fig:local_velocities}.
+Water velocity is maximum for this estuary during a rising tide, and reaches a magnitude of \SI{8.2}{m.s^{-1}}. The location of the maximum velocity is where the estuary narrows to \SI{120}{m}. It is not the shallowest or narrowest part of the estuary, but it is on a bending section and it is nearer the mouth than the narrowest part. The location of the fastest part of the estuary for a falling tide is in a similar place, as can be seen from Figures \ref{fig:global_velocities} and \ref{fig:local_velocities}.
 
 \begin{figure}[!h]
     \centering
@@ -180,11 +180,11 @@ Max slopes: 28
 % From handout: bullet points will do here.
 
 \begin{itemize}
-    \item The Fowey Estuary is a macrotidal Estuary that is suitable for being modelled by a two-dimensional shallow water model.
+    \item The Fowey Estuary is a macrotidal estuary that is suitable for being modelled by a two-dimensional shallow water model.
     \item It best modelled by RMA-2 when using a Manning bed friction coefficient of 0.025 and an eddy viscosity of \SI{9000}{ N.s.m^{-2} }.
     \item The rising tide produces faster water speeds than the falling tide. During the rising tide, peak water speed is \SI{8.2}{m.s^{-1}}.
-    \item Dredging the Estuary from the Berth out to sea would reduce the maximum speed by \SI{0.15}{m.s^{-1}} at the Berth, and \SI{0.10}{m.s^{-1}} at the Inlet.
-    \item Dredging the Estuary would have little to no effect further upstream of the dredged channel.
+    \item Dredging the estuary from the Berth out to sea would reduce the maximum speed by \SI{0.15}{m.s^{-1}} at the Berth, and \SI{0.10}{m.s^{-1}} at the Inlet.
+    \item Dredging the estuary would have little to no effect further upstream of the dredged channel.
 \end{itemize}
 
 \printbibliography[filter=practical1]

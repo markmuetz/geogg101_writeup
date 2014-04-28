@@ -16,7 +16,7 @@
 % Get rid of annoying line under header.
 \renewcommand{\headrulewidth}{0pt}
 
-\lhead{BTTM8 - SURFACE WATER MODELLING - EFFECTS OF DREDGING}
+\lhead{}
 \chead{}
 \rhead{}
 %\lfoot{}
@@ -32,6 +32,31 @@
 \bibliography{references/references}
 
 \begin{document}
+
+\textbf{UCL DEPARTMENT OF GEOGRAPHY}\\[4cm]
+
+\Large
+
+\textbf{EXAM CANDIDATE ID:} BTTM8
+
+\textbf{DEPARTMENT/COLLEGE:} Department of Geography
+
+\textbf{MODULE CODE:} GEOGG101
+
+\textbf{MODULE TITLE:} Surface Water Modelling
+
+\textbf{COURSE PAPER TITLE:} \\
+Modelling the effects of dredging on a tidal estuary/Modelling the effects of climate change on a catchment area \\[3cm]
+
+\textbf{NAME OF ACADEMIC TUTOR:} Jon French/Julian Thompson
+
+\textbf{WORD COUNT:} 2969
+
+\normalsize
+
+\newpage
+
+\lhead{BTTM8 - SURFACE WATER MODELLING - EFFECTS OF DREDGING}
 
 % Practical 1:
 \part*{Modelling the effects of dredging on a tidal estuary}
@@ -92,7 +117,7 @@ The model was run for \SI{74}{hours} with a \SI{15}{minute} timestep. It was run
 \subsection{Calibration}
 
 Throughout the calibration, turbulence was modelled using an eddy viscosity of \SI{9000}{ N.s.m^{-2} }.
-Following \textcite{piedra2007residual, sousa2007hydrodynamic}, the  Manning bed friction coefficient was varied to achieve the best fit between the model and the observations. The potential range for the Manning coefficient, $n$, was 0.01 to 0.04. The Root Mean Squared Error (RMSE) and Nash-Sutcliffe Efficiency (NSE, see \textcite{nash1970river}) were calculated for each value of $n$, with RMSE closer to 0 and NSE closer to one representing better fit.
+Following \textcite{piedra2007residual, sousa2007hydrodynamic}, the  Manning bed friction coefficient was varied to achieve the best fit between the model and the observations taken at the Mid-Estuary observation point (see Figure \ref{fig:fowey_estuary_map}). The potential range for the Manning coefficient, $n$, was 0.01 to 0.04. The Root Mean Squared Error (RMSE) and Nash-Sutcliffe Efficiency (NSE, see \textcite{nash1970river}) were calculated for each value of $n$, with RMSE closer to 0 and NSE closer to one representing better fit.
 
 \begin{align*}
     RMSE &= \frac{1}{N} \sqrt{ \sum_{t = 1}^N ( O_t - M_t) ^ 2 }\\
@@ -149,31 +174,34 @@ After dredging, the main change to the hydrodynamic regime is a reduced velocity
 \begin{figure}[!h]
     \centering
     \includegraphics[width=\linewidth]{geogg101_screenshots/practical1/dredging_delta_vel_mag}
-    \caption{Difference between original and dredged velocity magnitude, with surface water level shown for reference.}
+    \caption{Difference between original and dredged velocity magnitude, with surface water level at the Inlet shown for reference.}
     \label{fig:dredging_delta_vel_mag}
 \end{figure}
 
-There is an additional effect of dredging: the appearance of a localised area of increased velocity just upstream of the dredging. This is shown in TODO: %\ref{fig:dredging_hotspot}. 
+There is an additional effect of dredging: the appearance of a localised area of increased velocity just upstream of the dredging. This is shown in Figure \ref{fig:delta_vel_mag_depth}. 
 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=\linewidth]{geogg101_screenshots/practical1/delta_vel_mag_depth}
-    \caption{Difference between original and dredged velocity magnitude, with surface water level shown for reference.}
+    \caption{Difference between original and dredged velocity magnitude, with water depth shown for reference.}
     \label{fig:delta_vel_mag_depth}
 \end{figure}
 
+\clearpage
 \section{Discussion}
 
-TODO: finish off. Talks about how bathymetric uncertainty can be used to cal model: \textcite{cea2012bathymetric}
+% Wetting and drying.
+The model developed in this study did not consider wetting and drying of the estuary bed. This can be an important feature of estuaries, and would lead to changes in the water velocity magnitude around these areas. Also, the discharge from the rivers was assumed to be constant. This is unlikely to be the case, but given that the discharges were small this would not be likely to have much of an effect on the model output.
 
-Wetting and drying.
+The only parameter that was varied during the course of this study to calibrate the model was the Manning bed friction coefficient, $n$. The sensitivity to variations in eddy viscosity was not analysed. This parameter could be varied within its range of experimental uncertainty, and if the output was found to vary significantly, this could be used to calibrate the model. 
 
-Constant discharge.
+Another way of calibrating the model is to consider the uncertainties in the bathymetry for the region. It has been shown that by considering the sources of error in the bathymetry, and treating these as calibration parameters, significantly more efficient calibrations of estuary models can be made \parencite{cea2012bathymetric}.
 
-Eddy viscosity.
+The model mesh met most of SMS' quality criteria, however there were some issues with it, particularly 8 `Size Changed' which occurred along the boundary between the \SI{30}{m} elements and the \SI{50}{m} elements. The mesh could be refined at this location to ameliorate this problem. Additionally, once the dredging has been applied to the bathymetry, 28 `Max Slope' messages were seen on either side of the dredged channel. When the bathymetry has steep variations, it can lead to three-dimensional water movements, which are not well captured by two-dimensional models such as RMA-2.
 
-Element area change: 17 (8 on 30-50 boundary)
-Max slopes: 28
+
+%Constant discharge.
+
 
 \section{Conclusions}
 
@@ -195,11 +223,11 @@ Max slopes: 28
 
 % Practical 2:
 \lhead{BTTM8 - SURFACE WATER MODELLING - EFFECTS OF CLIMATE CHANGE ON A CATCHMENT}
-\part*{Modelling the effects of land use change and climate change on a catchment area}
+\part*{Modelling the effects of climate change on a catchment area}
 
 \section{Introduction}
 
-The purpose of this study is to calibrate and validate a model of the Karup Catchment in Denmark. This model will then be used to simulate how the catchment will bahave in 2050 under three future emissions scenarios of climate change: Low, Medium and High. These broadly correspond to the B1, A1B and A1Fl IPCC Special Report on Emissions Scenarios (SRES) (TODO: ref. IPCC 200).
+The purpose of this study is to calibrate and validate a model of the Karup Catchment in Denmark. This model will then be used to simulate how the catchment will bahave in 2050 under three future emissions scenarios of climate change: Low, Medium and High. These broadly correspond to the B1, A1B and A1FI IPCC Special Report on Emissions Scenarios (SRES) \parencite{ipcc2000special}.
 
 The Karup Catchment is \SI{440}{km^2}. It is situated in western Denmark and drains into the Skive Fjord. Geologically, it consists of highly permeable sand and gravel as well as occasionally lenses of clay. 
 The majority of land use is for agriculture (67\%), with forest (18\%), heath (10\%), wetland (4\%) and urban (1\%) making up the remainder \parencite{refsgaard1997parameterisation}.
@@ -418,7 +446,7 @@ Scatter graphs of the boreholes and discharge station again show that the model 
 \subsection{Effects of climate change}
 
 % TODO: say something about where these datasets came from.
-To simulate climate change in 2050, three different emissions scenarios were used. These were Low, Medium and High, and for each one of these new precipitation and evapotsranspiration time series were produced (one for each station in the case of precipitation). The calibrated model was then re-run with these new input data. Under these three different emissions scenarios, the river regime deviated from its original regime, as can be seen in Figure \ref{fig:effects_of_cc}. Each of the regimes is plotted against the simulated calibration/validation regime (CVR), not the observed data. The Medium and High scenarios both show significant deviation from the CVR, with the effect being largest in the winter when the discharge is greatest. The Low scenario does show deviation from the CVR, although not nearly as markedly.
+To simulate climate change in 2050, three different emissions scenarios were used. These were Low, Medium and High, which broadly correspond to the B1, A1B, A1FI scenarios in the IPCC SRES \parencite{ipcc2000special}. For each one of these new precipitation and evapotsranspiration time series were produced (one for each station in the case of precipitation). This was done by taking the existing precipitation and evapotsranspiration time series, and perturbing them by the predicted changes from the SRES scenarios. The calibrated model was then re-run with these new input data. Under these three different emissions scenarios, the river regime deviated from its original regime, as can be seen in Figure \ref{fig:effects_of_cc}. Each of the regimes is plotted against the simulated calibration/validation regime (CVR), not the observed data. The Medium and High scenarios both show significant deviation from the CVR, with the effect being largest in the winter when the discharge is greatest. The Low scenario does show deviation from the CVR, although not nearly as markedly.
 
 \begin{figure}[!h]
     \centering
@@ -427,6 +455,20 @@ To simulate climate change in 2050, three different emissions scenarios were use
     \label{fig:effects_of_cc}
 \end{figure}
 
+To investigate the effects of both precipitation and evapotsranspiration separately, the High scenario was re-run with first just the changed precipitation, and then the changed evapotsranspiration. The results can be seen in Figure \ref{fig:precip_evap_combined}. The first thing to note is that in the ``Precip. only'' graphs, the response (blue) is above the High scenario (red) and well above the control run (dashed black). Second, in the ``Evap. only'' graph, the response is well below the High scenario and below the control scenario. Third, in the ``Combined'' graph, the evapotsranspiration only and precipitation only values have been combined by taking their mean. Combining these two scenarios does not produce the same result as running the High scenario on its own, suggesting non-linearities in the model. Also, the combined result is below the High scenario, showing that the evapotsranspiration only has a larger effect than the precipitation only.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{geogg101_screenshots/practical2/precip_evap_combined}
+    \caption{River regimes showing the simulated effects of climate change under the High scenario considering precipitation only (blue), evapotsranspiration only (blue), and their combination (blue). For reference, the simulated calibration/validation river regime is shown (black dashes), as well as the High scenario regime (red). }
+    \label{fig:precip_evap_combined}
+\end{figure}
+
+\newpage
+\section{Discussion}
+
+The IPCC scenarios used to investigate climate change were the B1, A1B, A1FI, scenarios defined in \textcite{ipcc2000special}. These have been superseded by the Representative Concentration Pathways (RCPs) \parencite{van2011representative}, so it would be interesting to re-run the climate change scenarios using climatic data perturbed by the  RCP2.6, RCP4.5, RCP6.0 and RCP8.5 scenarios.
+
 \section{Conclusions}
 
 The MIKE SHE/MIKE 11 model performed well at reproducing the observations from the validation period after having been calibrated.
@@ -434,6 +476,7 @@ It had a slight tendency to overestimate the discharge in summer when the discha
 According the guidelines put forward by \textcite{henriksen2008assessment}, it performs excellently.
 Under a scenario of Low emissions up to 2050, the model predicts that the average monthly discharge at both of the measuring stations will be broadly unchanged.
 Under Medium and High emissions scenarios up to 2050, the model predicts that the average monthly discharge at both of the measuring stations will be higher by 10\% over the course of the year, with the biggest change in winter.
+When looking at the effects of precipitation only and evapotsranspiration only for the High scenario, the decrease in discharge due to the evapotsranspiration only is larger than the increase due to precipitation only. 
 
 
 \printbibliography[filter=practical2]
